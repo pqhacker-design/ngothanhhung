@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { ExternalLink, Eye, Heart, Copy, Check, Sparkles, Globe, Edit3, Trash2 } from 'lucide-react';
 import { WebAppItem, ViewMode } from '../types';
+import { normalizeImageUrl } from '../utils/imageUrl';
 
 interface AppCardProps {
   app: WebAppItem;
@@ -57,7 +58,7 @@ export const AppCard: React.FC<AppCardProps> = ({
           <div className="w-16 h-12 rounded-lg overflow-hidden shrink-0 border border-slate-200 dark:border-slate-800 bg-slate-100 dark:bg-slate-800 relative">
             {!imgError ? (
               <img
-                src={app.imageUrl}
+                src={normalizeImageUrl(app.imageUrl)}
                 alt={`Giao diện ${app.title}`}
                 referrerPolicy="no-referrer"
                 onError={() => setImgError(true)}
@@ -195,7 +196,7 @@ export const AppCard: React.FC<AppCardProps> = ({
       <div className="relative aspect-video w-full overflow-hidden bg-slate-950/5 dark:bg-slate-950/40 border-b border-slate-100 dark:border-slate-800">
         {!imgError ? (
           <img
-            src={app.imageUrl}
+            src={normalizeImageUrl(app.imageUrl)}
             alt={`Ảnh chụp giao diện của ${app.title}`}
             referrerPolicy="no-referrer"
             onError={() => setImgError(true)}

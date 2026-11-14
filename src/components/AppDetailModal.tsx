@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, ExternalLink, Copy, Check, Heart, Sparkles, Globe, Monitor, Smartphone, Share2, Layers } from 'lucide-react';
 import { WebAppItem } from '../types';
+import { normalizeImageUrl } from '../utils/imageUrl';
 
 interface AppDetailModalProps {
   app: WebAppItem | null;
@@ -182,7 +183,7 @@ export const AppDetailModal: React.FC<AppDetailModalProps> = ({
             {viewTab === 'screenshot' ? (
               <div className="relative aspect-video w-full overflow-hidden flex items-center justify-center bg-slate-900">
                 <img
-                  src={app.imageUrl}
+                  src={normalizeImageUrl(app.imageUrl)}
                   alt={`Giao diện ${app.title}`}
                   referrerPolicy="no-referrer"
                   className="w-full h-full object-contain"

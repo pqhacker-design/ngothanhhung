@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { X, Plus, Globe, Image as ImageIcon, Sparkles, Check } from 'lucide-react';
+import { X, Plus, Image as ImageIcon, Check } from 'lucide-react';
 import { WebAppItem, AppCategory } from '../types';
 import { CATEGORIES } from '../data/initialApps';
+import { normalizeImageUrl } from '../utils/imageUrl';
+
+import aitestproImg from '../assets/images/aitestpro_preview_1794380157331.jpg';
+import goitenhsImg from '../assets/images/goitenhs_preview_1794380158400.jpg';
+import smartflashImg from '../assets/images/smartflash_preview_1794380159223.jpg';
+import classroomtimerImg from '../assets/images/classroomtimer_preview_1794380165456.jpg';
 
 interface AddAppModalProps {
   isOpen: boolean;
@@ -11,10 +17,10 @@ interface AddAppModalProps {
 }
 
 const PRESET_IMAGES = [
-  { label: 'Giao diện AI Test Pro', url: '/src/assets/images/aitestpro_preview_1794380157331.jpg' },
-  { label: 'Giao diện Gọi Tên HS', url: '/src/assets/images/goitenhs_preview_1794380158400.jpg' },
-  { label: 'Giao diện Flashcard Học tập', url: '/src/assets/images/smartflash_preview_1794380159223.jpg' },
-  { label: 'Giao diện Bộ đếm & Tiện ích Lớp', url: '/src/assets/images/classroomtimer_preview_1794380165456.jpg' },
+  { label: 'Giao diện AI Test Pro', url: aitestproImg },
+  { label: 'Giao diện Gọi Tên HS', url: goitenhsImg },
+  { label: 'Giao diện Flashcard Học tập', url: smartflashImg },
+  { label: 'Giao diện Bộ đếm & Tiện ích Lớp', url: classroomtimerImg },
 ];
 
 export const AddAppModal: React.FC<AddAppModalProps> = ({
@@ -98,7 +104,7 @@ export const AddAppModal: React.FC<AddAppModalProps> = ({
       tagline: tagline.trim(),
       description: description.trim() || tagline.trim(),
       category,
-      imageUrl: imageUrl.trim() || PRESET_IMAGES[0].url,
+      imageUrl: normalizeImageUrl(imageUrl) || PRESET_IMAGES[0].url,
       tags: tags.length > 0 ? tags : ['Ứng dụng Web'],
       features: features.length > 0 ? features : ['Giao diện trực quan', 'Hoạt động đa nền tảng'],
       targetAudience: targetAudience.trim() || 'Người dùng trực tuyến',
@@ -300,10 +306,29 @@ export const AddAppModal: React.FC<AddAppModalProps> = ({
             <input
               type="text"
               value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
-              placeholder="Hoặc dán URL ảnh chụp màn hình trực tiếp tại đây..."
+              onChange={(e) => setImageUrl(normalizeImageUrl(e.target.value))}
+              placeholder="Dán link ảnh trực tiếp hoặc link chia sẻ Google Drive..."
               className="w-full px-3 py-1.5 text-xs bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-lg text-slate-900 dark:text-white focus:ring-2 focus:ring-indigo-500 focus:outline-none font-mono"
             />
+            <p className="mt-1.5 text-[11px] text-slate-500 dark:text-slate-400">
+              Hỗ trợ dán trực tiếp link chia sẻ Google Drive (nhớ bật quyền <span className="font-medium text-slate-700 dark:text-slate-300">Bất kỳ ai có đường liên kết</span>), hệ thống tự động chuyển đổi sang link hiển thị ảnh.
+            </p>
+            {imageUrl && !PRESET_IMAGES.some((p) => p.url === imageUrl) && (
+              <div className="mt-2 flex items-center gap-3 p-2 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/60">
+                <div className="w-24 aspect-video rounded overflow-hidden bg-slate-200 dark:bg-slate-700 shrink-0">
+                  <img
+                    src={normalizeImageUrl(imageUrl)}
+                    alt="Xem trước ảnh"
+                    referrerPolicy="no-referrer"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="min-w-0 text-[11px] text-slate-500 dark:text-slate-400">
+                  <div className="font-medium text-slate-700 dark:text-slate-200">Xem trước ảnh từ URL</div>
+                  <div className="truncate font-mono text-[10px] mt-0.5">{normalizeImageUrl(imageUrl)}</div>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2 pt-1">
