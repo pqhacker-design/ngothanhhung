@@ -1,0 +1,6 @@
+{
+  "name": "App Hub - Thầy Ngô Thanh Hùng",
+  "description": "Danh mục các ứng dụng web và công cụ số hỗ trợ giảng dạy, thi cử và quản lý lớp học của Thầy Ngô Thanh Hùng (THCS Bình San - Mỹ Đức).",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
