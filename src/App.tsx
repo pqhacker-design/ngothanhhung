@@ -360,8 +360,8 @@ export default function App() {
             </div>
           </div>
         ) : (
-          /* Cards Grid View */
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          /* Cards Grid View - 4 per row */
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {filteredApps.map((app) => (
               <AppCard
                 key={app.id}

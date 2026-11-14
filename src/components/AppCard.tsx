@@ -162,32 +162,29 @@ export const AppCard: React.FC<AppCardProps> = ({
   return (
     <article
       onClick={() => onSelectApp(app)}
-      className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden hover:border-slate-300 dark:hover:border-slate-700 hover:shadow-lg transition-all duration-200 flex flex-col cursor-pointer"
+      className="group bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden hover:border-indigo-300 dark:hover:border-indigo-700/60 hover:shadow-md transition-all duration-200 flex flex-col cursor-pointer"
     >
-      {/* Browser Mockup Window Header */}
-      <div className="bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700/80 px-3.5 py-2 flex items-center justify-between gap-2">
-        {/* Mock window control buttons */}
-        <div className="flex items-center gap-1.5 shrink-0">
-          <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
-          <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
+      {/* Compact Browser Mockup Header */}
+      <div className="bg-slate-100/90 dark:bg-slate-800/90 border-b border-slate-200 dark:border-slate-700/80 px-2.5 py-1.5 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-1 shrink-0">
+          <span className="w-2 h-2 rounded-full bg-rose-400" />
+          <span className="w-2 h-2 rounded-full bg-amber-400" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400" />
         </div>
 
-        {/* Mock address bar */}
-        <div className="flex-1 max-w-xs mx-auto bg-white/80 dark:bg-slate-900/80 rounded-md px-2.5 py-0.5 text-[11px] font-mono text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1.5 truncate border border-slate-200/60 dark:border-slate-700/60">
-          <Globe className="w-3 h-3 text-slate-400 shrink-0" />
+        <div className="flex-1 min-w-0 bg-white/80 dark:bg-slate-900/80 rounded px-2 py-0.5 text-[10px] font-mono text-slate-500 dark:text-slate-400 flex items-center justify-center gap-1 truncate border border-slate-200/60 dark:border-slate-700/60">
+          <Globe className="w-2.5 h-2.5 text-slate-400 shrink-0" />
           <span className="truncate">{domainName}</span>
         </div>
 
-        {/* Quick action: copy link */}
         <button
           type="button"
           onClick={handleCopyUrl}
           title="Sao chép URL ứng dụng"
-          className="p-1 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors shrink-0"
+          className="p-0.5 text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 transition-colors shrink-0"
         >
           {copied ? (
-            <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-medium">Đã chép</span>
+            <Check className="w-3 h-3 text-emerald-600 dark:text-emerald-400" />
           ) : (
             <Copy className="w-3 h-3" />
           )}
@@ -205,44 +202,42 @@ export const AppCard: React.FC<AppCardProps> = ({
             className="w-full h-full object-cover object-top group-hover:scale-[1.03] transition-transform duration-300"
           />
         ) : (
-          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-slate-100 dark:from-slate-900 dark:to-indigo-950/30 p-6 text-center">
-            <Globe className="w-10 h-10 text-indigo-500 mb-2" />
-            <span className="font-semibold text-slate-800 dark:text-slate-200 text-sm">{app.title}</span>
-            <span className="text-xs text-slate-500 dark:text-slate-400 mt-1">{domainName}</span>
+          <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-indigo-50 to-slate-100 dark:from-slate-900 dark:to-indigo-950/30 p-4 text-center">
+            <Globe className="w-7 h-7 text-indigo-500 mb-1.5" />
+            <span className="font-semibold text-slate-800 dark:text-slate-200 text-xs truncate max-w-full">{app.title}</span>
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 mt-0.5 truncate max-w-full">{domainName}</span>
           </div>
         )}
 
-        {/* Floating Quick Action Overlay on Hover */}
-        <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3 backdrop-blur-[2px]">
+        {/* Quick Hover Overlay */}
+        <div className="absolute inset-0 bg-slate-900/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2 backdrop-blur-[1px]">
           <button
             type="button"
             onClick={(e) => {
               e.stopPropagation();
               onSelectApp(app);
             }}
-            className="px-3.5 py-2 rounded-lg bg-white/95 text-slate-900 text-xs font-semibold hover:bg-white transition-colors flex items-center gap-1.5 shadow-md"
+            className="px-2.5 py-1.5 rounded-lg bg-white/95 text-slate-900 text-[11px] font-semibold hover:bg-white transition-colors flex items-center gap-1 shadow-md whitespace-nowrap shrink-0"
           >
-            <Eye className="w-3.5 h-3.5 text-indigo-600" />
-            <span>Xem chi tiết</span>
+            <Eye className="w-3 h-3 text-indigo-600" />
+            <span>Chi tiết</span>
           </button>
           <button
             type="button"
             onClick={handleOpenExternal}
-            className="px-3.5 py-2 rounded-lg bg-indigo-600 text-white text-xs font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-1.5 shadow-md"
+            className="px-2.5 py-1.5 rounded-lg bg-indigo-600 text-white text-[11px] font-semibold hover:bg-indigo-700 transition-colors flex items-center gap-1 shadow-md whitespace-nowrap shrink-0"
           >
             <span>Mở app</span>
-            <ExternalLink className="w-3.5 h-3.5" />
+            <ExternalLink className="w-3 h-3" />
           </button>
         </div>
       </div>
 
-      {/* Card Body */}
-      <div className="p-5 flex-1 flex flex-col justify-between">
+      {/* Compact Card Body */}
+      <div className="p-3.5 flex-1 flex flex-col justify-between">
         <div>
-          {/* Unboxed Metadata with Typographic Separator (Zero-Pill Rule) */}
-          <div className="flex items-center gap-2 text-xs text-slate-500 dark:text-slate-400 mb-2">
-            <span>{app.targetAudience}</span>
-            <span aria-hidden="true">·</span>
+          {/* Unboxed Metadata */}
+          <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400 mb-1 truncate">
             <span>{app.status === 'popular' ? 'Phổ biến' : app.status === 'new' ? 'Mới ra mắt' : 'Hoạt động'}</span>
             {app.featured && (
               <>
@@ -252,52 +247,20 @@ export const AppCard: React.FC<AppCardProps> = ({
             )}
           </div>
 
-          {/* Primary App Title */}
-          <h2 className="text-lg font-bold text-slate-900 dark:text-white tracking-tight group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+          {/* App Title */}
+          <h2 className="text-[15px] font-bold text-slate-900 dark:text-white tracking-tight leading-snug line-clamp-1 group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
             {app.title}
           </h2>
 
-          {/* Tagline */}
-          <p className="mt-1 text-sm font-medium text-slate-700 dark:text-slate-300 line-clamp-2">
+          {/* Concise Tagline */}
+          <p className="mt-1 text-xs text-slate-600 dark:text-slate-400 line-clamp-2 leading-relaxed">
             {app.tagline}
           </p>
-
-          {/* Short Description */}
-          <p className="mt-2 text-xs text-slate-500 dark:text-slate-400 line-clamp-3 leading-relaxed">
-            {app.description}
-          </p>
-
-          {/* Key Features Bullets */}
-          {app.features && app.features.length > 0 && (
-            <div className="mt-3 pt-3 border-t border-slate-100 dark:border-slate-800">
-              <div className="text-[11px] font-semibold text-slate-600 dark:text-slate-300 mb-1.5">
-                Tính năng cốt lõi:
-              </div>
-              <ul className="space-y-1">
-                {app.features.slice(0, 2).map((feat, idx) => (
-                  <li key={idx} className="text-xs text-slate-600 dark:text-slate-400 flex items-start gap-1.5">
-                    <span className="text-indigo-500 font-bold mt-0.5">✓</span>
-                    <span className="line-clamp-1">{feat}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Clean Tags: Unboxed text separated by dots */}
-          <div className="mt-3 flex flex-wrap items-center gap-x-2 gap-y-1 text-[11px] text-slate-500 dark:text-slate-400">
-            {app.tags.slice(0, 3).map((tag, idx) => (
-              <React.Fragment key={idx}>
-                <span>#{tag}</span>
-                {idx < Math.min(app.tags.length, 3) - 1 && <span aria-hidden="true">·</span>}
-              </React.Fragment>
-            ))}
-          </div>
         </div>
 
-        {/* Action Row */}
-        <div className="mt-5 pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5">
+        {/* Compact Action Row */}
+        <div className="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-1.5">
+          <div className="flex items-center gap-1 shrink-0">
             <button
               type="button"
               onClick={(e) => {
@@ -305,14 +268,14 @@ export const AppCard: React.FC<AppCardProps> = ({
                 onLikeApp(app.id);
               }}
               title="Yêu thích ứng dụng"
-              className={`p-1.5 rounded-lg border text-xs flex items-center gap-1 transition-colors ${
+              className={`px-1.5 py-1 rounded-md border text-[11px] flex items-center gap-1 transition-colors whitespace-nowrap shrink-0 ${
                 isLiked
                   ? 'border-rose-200 bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:border-rose-900 dark:text-rose-400'
                   : 'border-slate-200 dark:border-slate-800 text-slate-500 hover:text-slate-800 dark:hover:text-slate-200'
               }`}
             >
-              <Heart className={`w-3.5 h-3.5 ${isLiked ? 'fill-rose-500 text-rose-500' : ''}`} />
-              <span className="tabular-nums font-mono text-[11px]">{(app.likesCount || 0) + (isLiked ? 1 : 0)}</span>
+              <Heart className={`w-3 h-3 ${isLiked ? 'fill-rose-500 text-rose-500' : ''}`} />
+              <span className="tabular-nums font-mono">{(app.likesCount || 0) + (isLiked ? 1 : 0)}</span>
             </button>
 
             {isAdmin && onEditApp && onDeleteApp && (
@@ -323,10 +286,10 @@ export const AppCard: React.FC<AppCardProps> = ({
                     e.stopPropagation();
                     onEditApp(app);
                   }}
-                  title="Chỉnh sửa ứng dụng này (Admin)"
-                  className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                  title="Chỉnh sửa ứng dụng (Admin)"
+                  className="p-1 rounded-md border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                 >
-                  <Edit3 className="w-3.5 h-3.5" />
+                  <Edit3 className="w-3 h-3" />
                 </button>
                 <button
                   type="button"
@@ -334,33 +297,33 @@ export const AppCard: React.FC<AppCardProps> = ({
                     e.stopPropagation();
                     onDeleteApp(app.id);
                   }}
-                  title="Xóa ứng dụng này (Admin)"
-                  className="p-1.5 rounded-lg border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
+                  title="Xóa ứng dụng (Admin)"
+                  className="p-1 rounded-md border border-slate-200 dark:border-slate-800 text-slate-500 hover:text-rose-600 dark:hover:text-rose-400 transition-colors"
                 >
-                  <Trash2 className="w-3.5 h-3.5" />
+                  <Trash2 className="w-3 h-3" />
                 </button>
               </>
             )}
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1 shrink-0">
             <button
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
                 onSelectApp(app);
               }}
-              className="px-3 py-1.5 text-xs font-medium text-slate-700 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors"
+              className="px-2 py-1 text-[11px] font-medium text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white transition-colors whitespace-nowrap shrink-0"
             >
               Chi tiết
             </button>
             <button
               type="button"
               onClick={handleOpenExternal}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 active:bg-indigo-800 transition-colors shadow-xs"
+              className="flex items-center gap-1 px-2.5 py-1 text-[11px] font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 active:bg-indigo-800 transition-colors shadow-xs whitespace-nowrap shrink-0"
             >
-              <span>Mở ứng dụng</span>
-              <ExternalLink className="w-3.5 h-3.5" />
+              <span>Mở app</span>
+              <ExternalLink className="w-3 h-3" />
             </button>
           </div>
         </div>
